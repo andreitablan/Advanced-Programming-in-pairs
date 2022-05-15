@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -11,11 +12,9 @@ import java.net.Socket;
  */
 class ClientThread extends Thread {
     private Socket socket = null;
-    private RunningServerSocket socket1;
 
-    public ClientThread(Socket socket,RunningServerSocket socket1) {
+    public ClientThread(Socket socket) {
         this.socket = socket;
-        this.socket1 = socket1;
     }
 
     public void run() {
@@ -32,29 +31,30 @@ class ClientThread extends Thread {
 
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String request = input.readLine();
+                String[] requestArguments = request.split(" ");
 
                 PrintWriter output = new PrintWriter(socket.getOutputStream());
-                if (request.equals(comand7)) {
+                if (requestArguments[0].equals(comand7)) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (request.equals(comand6)) {
+                } else if (requestArguments[0].equals(comand6)) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (request.equals(comand5)) {
+                } else if (requestArguments[0].equals(comand5)) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (request.equals(comand4)) {
+                } else if (requestArguments[0].equals(comand4)) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (request.equals(comand3)) {
+                } else if (requestArguments[0].equals(comand3)) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (request.equals(comand1)) {
+                } else if (requestArguments[0].equals(comand1)) {
 
                     String raspuns = "You did exit from the serer!";
                     output.println(raspuns);
@@ -65,13 +65,13 @@ class ClientThread extends Thread {
                         System.err.println(e);
                     }
                     break;
-                } else if (request.equals(comand2)) {
-                    String raspuns = "serverClasses.Server stopped!";
+                } else if (requestArguments[0].equals(comand2)) {
+                    String raspuns = "Server stopped!";
                     output.println(raspuns);
                     output.flush();
                     try {
                         socket.close();
-                        socket1.running=false;
+                        System.exit(0);
                     } catch (IOException e) {
                         System.err.println(e);
                     }

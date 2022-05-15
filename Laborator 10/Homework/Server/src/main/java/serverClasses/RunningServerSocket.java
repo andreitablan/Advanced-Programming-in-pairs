@@ -9,7 +9,7 @@ import java.net.Socket;
  */
 public class RunningServerSocket {
     public static int PORT = 0;
-    public boolean running=true;
+
     public RunningServerSocket(int PORT) throws IOException {
         RunningServerSocket.PORT = PORT;
 
@@ -18,15 +18,12 @@ public class RunningServerSocket {
         try {
             serverSocket = new ServerSocket(PORT);
 
-            while (running) {
+            while (true) {
                 System.out.println("Waiting for a client ...");
-
                 Socket socket = serverSocket.accept();
-
-                if(running)
-                   new ClientThread(socket,this).start();
+                new ClientThread(socket).start();
             }
-            System.exit(0);
+
             
         } catch (IOException e) {
             System.err.println("Error at socket " + e);

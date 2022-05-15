@@ -1,7 +1,7 @@
 package serverClasses;
 
-public class Timekeeper {
-    public Timekeeper(float frameTime) {
+public class Timeout {
+    public Timeout(float frameTime) {
         timeAccumulator = 0;
         this.frameTime = frameTime;
     }
