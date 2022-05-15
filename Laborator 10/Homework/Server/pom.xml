@@ -19,6 +19,19 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+    <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-dom</artifactId>
+        <version>1.13</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-svggen -->
+    <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-svggen</artifactId>
+        <version>1.7</version>
+    </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
