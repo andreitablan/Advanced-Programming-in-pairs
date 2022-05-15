@@ -3,6 +3,7 @@ package serverClasses;
 import commands.CommandFriend;
 import commands.CommandLogin;
 import commands.CommandRegister;
+import commands.CommandSend;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 /**
  * This is the class responsible with a client Thread
@@ -49,6 +51,14 @@ class ClientThread extends Thread {
                     output.println(raspuns);
                     output.flush();
                 } else if (requestArguments[0].equals(send) && this.loggedUserName!=null) {
+
+                    String message="";
+                    for(int index=1;index<requestArguments.length;index++)
+                        message=message+" "+requestArguments[index];
+
+                    CommandSend commandSend=new CommandSend(runningServerSocket);
+                    commandSend.sendMessage(message,this.loggedUserName);
+
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();

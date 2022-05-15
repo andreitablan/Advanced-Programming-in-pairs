@@ -1,11 +1,11 @@
 package serverClasses;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class User {
     public String name;
     private List<User> friends = new ArrayList<User>();
+    private HashMap<User,List<String>> messages= new HashMap<>();
 
     public User() {
     }
@@ -29,5 +29,13 @@ public class User {
     public void addFriend(User user)
     {
         this.friends.add(user);
+    }
+
+    public void addMessage(User user, String message){
+     messages.put(user, Collections.singletonList(message));
+    }
+
+    public HashMap<User, List<String>> getMessages() {
+        return messages;
     }
 }
