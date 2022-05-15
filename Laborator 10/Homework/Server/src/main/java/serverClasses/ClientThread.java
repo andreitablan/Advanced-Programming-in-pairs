@@ -47,7 +47,7 @@ class ClientThread extends Thread {
                 this.commandCounter += 1;
 
                 if (requestArguments[0].equals(read) && this.loggedUserName != null) {
-                    CommandRead commandRead= new CommandRead(runningServerSocket);
+                    CommandRead commandRead = new CommandRead(runningServerSocket);
                     String raspuns = commandRead.readMessages(this.loggedUserName);
                     output.println(raspuns);
                     output.flush();
@@ -111,13 +111,12 @@ class ClientThread extends Thread {
                     output.println(raspuns);
                     output.flush();
                     runningServerSocket.setRunning(false);
-                }else if(requestArguments[0].equals(svg)) {
-                    TestSVGGen testSVGGen=new TestSVGGen(runningServerSocket.users);
+                } else if (requestArguments[0].equals(svg)) {
+                    TestSVGGen testSVGGen = new TestSVGGen(runningServerSocket.users);
                     String raspuns = "Exported the SVG.";
                     output.println(raspuns);
                     output.flush();
-                }
-                else {
+                } else {
                     String raspuns = "Wrong command! Please send one of the following: register, login, friend, send, read, exit, stop.";
                     output.println(raspuns);
                     output.flush();

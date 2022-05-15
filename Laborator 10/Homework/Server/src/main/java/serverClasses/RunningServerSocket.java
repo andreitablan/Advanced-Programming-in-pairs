@@ -12,7 +12,7 @@ import java.util.List;
 public class RunningServerSocket {
     public static int PORT = 0;
     public List<User> users = new ArrayList<User>();
-    public boolean running=true;
+    public boolean running = true;
 
     public RunningServerSocket(int PORT) throws IOException {
         RunningServerSocket.PORT = PORT;
@@ -25,15 +25,15 @@ public class RunningServerSocket {
             while (running) {
                 System.out.println("Waiting for a client ...");
                 Socket socket = serverSocket.accept();
-                ClientThread clientThread =new ClientThread(socket, this);
+                ClientThread clientThread = new ClientThread(socket, this);
                 clientThread.start();
-                Timekeeper timer=new Timekeeper(0,clientThread);
-                Thread threadTimer=new Thread(timer);
+                Timekeeper timer = new Timekeeper(0, clientThread);
+                Thread threadTimer = new Thread(timer);
                 threadTimer.setDaemon(true);
                 threadTimer.start();
                 new Timekeeper(0, clientThread);
             }
-            
+
         } catch (IOException e) {
             System.err.println("Error at socket " + e);
         } finally {

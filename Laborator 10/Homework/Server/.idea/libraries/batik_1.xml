@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="batik-1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../../apacheBatik/batik-1.7" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../../../../../apacheBatik/batik-1.7/docs/javadoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../../../apacheBatik/batik-1.7/docs/demo" />
+      <root url="file://$PROJECT_DIR$/../../../../../apacheBatik/batik-1.7/samples/tests/resources/java/sources" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../apacheBatik/batik-1.7" recursive="false" />
+  </library>
+</component>

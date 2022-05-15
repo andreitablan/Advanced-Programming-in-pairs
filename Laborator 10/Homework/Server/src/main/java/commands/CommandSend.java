@@ -16,9 +16,9 @@ public class CommandSend extends AbstractCommand {
                 user = runningServerSocket.users.get(index);
             }
         }
-        for(User user1:user.getFriends()){
-            user1.addMessage(user,message);
+        for (User user1 : user.getFriends()) {
+            user1.addMessage(user, message);
         }
-        
+
     }
 }

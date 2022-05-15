@@ -5,7 +5,7 @@ import java.util.*;
 public class User {
     public String name;
     private List<User> friends = new ArrayList<User>();
-    private HashMap<User,List<String>> messages= new HashMap<>();
+    private HashMap<User, List<String>> messages = new HashMap<>();
 
     public User() {
     }
@@ -26,12 +26,11 @@ public class User {
         this.friends = friends;
     }
 
-    public void addFriend(User user)
-    {
+    public void addFriend(User user) {
         this.friends.add(user);
     }
 
-    public void addMessage(User user, String message){
+    public void addMessage(User user, String message) {
         for (User user1 : friends) {
             if (!messages.containsKey(user)) {
                 messages.put(user, new ArrayList<String>());
