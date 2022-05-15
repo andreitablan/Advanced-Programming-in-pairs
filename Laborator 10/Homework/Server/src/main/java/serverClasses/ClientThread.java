@@ -1,5 +1,7 @@
 package serverClasses;
 
+import commands.CommandRegister;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,9 +14,10 @@ import java.net.Socket;
  */
 class ClientThread extends Thread {
     private Socket socket = null;
-
-    public ClientThread(Socket socket) {
+    public RunningServerSocket runningServerSocket=null;
+    public ClientThread(Socket socket, RunningServerSocket runningServerSocket) {
         this.socket = socket;
+        this.runningServerSocket=runningServerSocket;
     }
 
     public void run() {
@@ -51,6 +54,8 @@ class ClientThread extends Thread {
                     output.println(raspuns);
                     output.flush();
                 } else if (requestArguments[0].equals(comand3)) {
+                    CommandRegister commandRegister=new CommandRegister(runningServerSocket);
+                    commandRegister.addUser(requestArguments[1]);
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
@@ -85,4 +90,6 @@ class ClientThread extends Thread {
             System.err.println("Communication error" + e);
         }
     }
+
+
 }
