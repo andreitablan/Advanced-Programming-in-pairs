@@ -1,9 +1,6 @@
 package serverClasses;
 
-import commands.CommandFriend;
-import commands.CommandLogin;
-import commands.CommandRegister;
-import commands.CommandSend;
+import commands.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,12 +15,13 @@ import java.util.Arrays;
  */
 class ClientThread extends Thread {
     public Socket socket = null;
-    private int commandCounter=0;
-    public String loggedUserName=null;
-    public RunningServerSocket runningServerSocket=null;
+    private int commandCounter = 0;
+    public String loggedUserName = null;
+    public RunningServerSocket runningServerSocket = null;
+
     public ClientThread(Socket socket, RunningServerSocket runningServerSocket) {
         this.socket = socket;
-        this.runningServerSocket=runningServerSocket;
+        this.runningServerSocket = runningServerSocket;
     }
 
     public void run() {
@@ -44,57 +42,57 @@ class ClientThread extends Thread {
 
                 PrintWriter output = new PrintWriter(socket.getOutputStream());
 
-                this.commandCounter+=1;
+                this.commandCounter += 1;
 
-                if (requestArguments[0].equals(read) && this.loggedUserName!=null) {
-                    String raspuns = "serverClasses.Server received the request " + request + ".";
-                    output.println(raspuns);
-                    output.flush();
-                } else if (requestArguments[0].equals(send) && this.loggedUserName!=null) {
+                if (requestArguments[0].equals(read) && this.loggedUserName != null) {
 
-                    String message="";
-                    for(int index=1;index<requestArguments.length;index++)
-                        message=message+" "+requestArguments[index];
-
-                    CommandSend commandSend=new CommandSend(runningServerSocket);
-                    commandSend.sendMessage(message,this.loggedUserName);
+                    CommandRead commandRead= new CommandRead(runningServerSocket);
+                    System.out.println(commandRead.readMessages(this.loggedUserName));
 
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(friend) && this.loggedUserName!=null) {
+                } else if (requestArguments[0].equals(send) && this.loggedUserName != null) {
 
-                    CommandFriend commandFriend=new CommandFriend(runningServerSocket);
-                    for(int index=1;index<requestArguments.length;index++)
-                        commandFriend.addFriend( this.loggedUserName,requestArguments[index]);
+                    String message = "";
+                    for (int index = 1; index < requestArguments.length; index++)
+                        message = message + " " + requestArguments[index];
+
+                    CommandSend commandSend = new CommandSend(runningServerSocket);
+                    commandSend.sendMessage(message, this.loggedUserName);
+
+                    String raspuns = "serverClasses.Server received the request " + request + ".";
+                    output.println(raspuns);
+                    output.flush();
+                } else if (requestArguments[0].equals(friend) && this.loggedUserName != null) {
+
+                    CommandFriend commandFriend = new CommandFriend(runningServerSocket);
+                    for (int index = 1; index < requestArguments.length; index++)
+                        commandFriend.addFriend(this.loggedUserName, requestArguments[index]);
                     String raspuns = "Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
                 } else if (requestArguments[0].equals(login)) {
 
-                    CommandLogin commandLogin=new CommandLogin(runningServerSocket);
-                    if(commandLogin.verify(requestArguments[1]))
-                    {
-                        this.loggedUserName=requestArguments[1];
-                    String raspuns = "You did login as " + requestArguments[1] + ".";
-                    output.println(raspuns);
-                    }
-                    else
-                    {
+                    CommandLogin commandLogin = new CommandLogin(runningServerSocket);
+                    if (commandLogin.verify(requestArguments[1])) {
+                        this.loggedUserName = requestArguments[1];
+                        String raspuns = "You did login as " + requestArguments[1] + ".";
+                        output.println(raspuns);
+                    } else {
                         String raspuns = "The user " + requestArguments[1] + " does not exist!";
                         output.println(raspuns);
                     }
                     output.flush();
                 } else if (requestArguments[0].equals(register)) {
-                    CommandRegister commandRegister=new CommandRegister(runningServerSocket);
+                    CommandRegister commandRegister = new CommandRegister(runningServerSocket);
 
-                    if(!commandRegister.verify(requestArguments[1])){
+                    if (!commandRegister.verify(requestArguments[1])) {
                         commandRegister.addUser(requestArguments[1]);
                         String raspuns = "You did registered as " + requestArguments[1] + ".";
                         output.println(raspuns);
-                        this.loggedUserName=requestArguments[1];
-                    }
-                    else{
+                        this.loggedUserName = requestArguments[1];
+                    } else {
                         String raspuns = "The user " + requestArguments[1] + " already exists!";
                         output.println(raspuns);
                     }

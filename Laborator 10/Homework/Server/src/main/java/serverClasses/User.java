@@ -32,7 +32,14 @@ public class User {
     }
 
     public void addMessage(User user, String message){
-     messages.put(user, Collections.singletonList(message));
+        for (User user1 : friends) {
+            if (!messages.containsKey(user)) {
+                messages.put(user, new ArrayList<String>());
+            }
+
+            messages.get(user).add(message);
+        }
+
     }
 
     public HashMap<User, List<String>> getMessages() {
