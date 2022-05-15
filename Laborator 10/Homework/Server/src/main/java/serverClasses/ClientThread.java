@@ -1,5 +1,7 @@
 package serverClasses;
 
+import commands.CommandFriend;
+import commands.CommandLogin;
 import commands.CommandRegister;
 
 import java.io.BufferedReader;
@@ -13,7 +15,9 @@ import java.net.Socket;
  * This is the class responsible with a client Thread
  */
 class ClientThread extends Thread {
-    private Socket socket = null;
+    public Socket socket = null;
+    private int commandCounter=0;
+    public String loggedUserName=null;
     public RunningServerSocket runningServerSocket=null;
     public ClientThread(Socket socket, RunningServerSocket runningServerSocket) {
         this.socket = socket;
@@ -24,42 +28,68 @@ class ClientThread extends Thread {
         try {
             while (true) {
 
-                String comand1 = "exit";
-                String comand2 = "stop";
-                String comand3 = "register";
-                String comand4 = "login";
-                String comand5 = "friend";
-                String comand6 = "send";
-                String comand7 = "read";
+                String exit = "exit";
+                String stop = "stop";
+                String register = "register";
+                String login = "login";
+                String friend = "friend";
+                String send = "send";
+                String read = "read";
 
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String request = input.readLine();
                 String[] requestArguments = request.split(" ");
 
                 PrintWriter output = new PrintWriter(socket.getOutputStream());
-                if (requestArguments[0].equals(comand7)) {
+
+                this.commandCounter+=1;
+
+                if (requestArguments[0].equals(read) && this.loggedUserName!=null) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(comand6)) {
+                } else if (requestArguments[0].equals(send) && this.loggedUserName!=null) {
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(comand5)) {
-                    String raspuns = "serverClasses.Server received the request " + request + ".";
+                } else if (requestArguments[0].equals(friend) && this.loggedUserName!=null) {
+
+                    CommandFriend commandFriend=new CommandFriend(runningServerSocket);
+                    for(int index=1;index<requestArguments.length;index++)
+                        commandFriend.addFriend( this.loggedUserName,requestArguments[index]);
+                    String raspuns = "Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(comand4)) {
-                    String raspuns = "serverClasses.Server received the request " + request + ".";
+                } else if (requestArguments[0].equals(login)) {
+
+                    CommandLogin commandLogin=new CommandLogin(runningServerSocket);
+                    if(commandLogin.verify(requestArguments[1]))
+                    {
+                        this.loggedUserName=requestArguments[1];
+                    String raspuns = "You did login as " + requestArguments[1] + ".";
                     output.println(raspuns);
+                    }
+                    else
+                    {
+                        String raspuns = "The user " + requestArguments[1] + " does not exist!";
+                        output.println(raspuns);
+                    }
                     output.flush();
-                } else if (requestArguments[0].equals(comand3)) {
+                } else if (requestArguments[0].equals(register)) {
                     CommandRegister commandRegister=new CommandRegister(runningServerSocket);
-                    commandRegister.addUser(requestArguments[1]);
-                    String raspuns = "serverClasses.Server received the request " + request + ".";
-                    output.println(raspuns);
+
+                    if(!commandRegister.verify(requestArguments[1])){
+                        commandRegister.addUser(requestArguments[1]);
+                        String raspuns = "You did registered as " + requestArguments[1] + ".";
+                        output.println(raspuns);
+                        this.loggedUserName=requestArguments[1];
+                    }
+                    else{
+                        String raspuns = "The user " + requestArguments[1] + " already exists!";
+                        output.println(raspuns);
+                    }
                     output.flush();
-                } else if (requestArguments[0].equals(comand1)) {
+                } else if (requestArguments[0].equals(exit)) {
 
                     String raspuns = "You did exit from the serer!";
                     output.println(raspuns);
@@ -70,7 +100,7 @@ class ClientThread extends Thread {
                         System.err.println(e);
                     }
                     break;
-                } else if (requestArguments[0].equals(comand2)) {
+                } else if (requestArguments[0].equals(stop)) {
                     String raspuns = "Server stopped!";
                     output.println(raspuns);
                     output.flush();
@@ -91,5 +121,7 @@ class ClientThread extends Thread {
         }
     }
 
-
+    public int getCommandCounter() {
+        return commandCounter;
+    }
 }

@@ -11,4 +11,10 @@ public class CommandRegister extends AbstractCommand {
         user.setName(name);
         runningServerSocket.users.add(user);
     }
+    public boolean verify(String name)
+    {
+        for(int index=0; index<runningServerSocket.users.size();index++)
+            if(runningServerSocket.users.get(index).name.equals(name)) return true;
+        return false;
+    }
 }

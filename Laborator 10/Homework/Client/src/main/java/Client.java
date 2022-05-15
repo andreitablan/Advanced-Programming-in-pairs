@@ -34,8 +34,6 @@ public class Client {
 
         } catch (UnknownHostException e) {
             System.err.println("No server listening... " + e);
-
         }
-
     }
 }

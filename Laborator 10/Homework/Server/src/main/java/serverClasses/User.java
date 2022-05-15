@@ -5,7 +5,7 @@ import java.util.List;
 
 public class User {
     public String name;
-    List<User> friends = new ArrayList<User>();
+    private List<User> friends = new ArrayList<User>();
 
     public User() {
     }
@@ -24,5 +24,10 @@ public class User {
 
     public void setFriends(List<User> friends) {
         this.friends = friends;
+    }
+
+    public void addFriend(User user)
+    {
+        this.friends.add(user);
     }
 }

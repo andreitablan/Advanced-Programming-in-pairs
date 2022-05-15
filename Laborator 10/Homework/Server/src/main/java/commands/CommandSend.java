@@ -1,6 +1,9 @@
 package commands;
 
+import serverClasses.RunningServerSocket;
+
 public class CommandSend extends AbstractCommand{
-    public CommandSend() {super();
+    public CommandSend(RunningServerSocket runningServerSocket) {
+        super(runningServerSocket);
     }
 }

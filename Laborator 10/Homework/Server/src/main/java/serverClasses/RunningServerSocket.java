@@ -24,9 +24,14 @@ public class RunningServerSocket {
             while (true) {
                 System.out.println("Waiting for a client ...");
                 Socket socket = serverSocket.accept();
-                new ClientThread(socket, this).start();
+                ClientThread clientThread =new ClientThread(socket, this);
+                clientThread.start();
+                Timekeeper timer=new Timekeeper(0,clientThread);
+                Thread threadTimer=new Thread(timer);
+                threadTimer.setDaemon(true);
+                threadTimer.start();
+                new Timekeeper(0, clientThread);
             }
-
             
         } catch (IOException e) {
             System.err.println("Error at socket " + e);
@@ -34,4 +39,5 @@ public class RunningServerSocket {
             serverSocket.close();
         }
     }
+
 }
