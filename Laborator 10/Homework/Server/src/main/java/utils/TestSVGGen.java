@@ -66,8 +66,8 @@ public class TestSVGGen{
             g2d.setFont(g2d.getFont().deriveFont(15f));
             g2d.setPaint(Color.blue);
             g2d.drawString(this.users.get(index).getName(),xCoordonate - radius1 + 10, yCoordonate - radius1+25);
-            hashMapX.put(this.users.get(index), xCoordonate - radius1 + 10);
-            hashMapX.put(this.users.get(index), yCoordonate - radius1+25);
+            hashMapX.put(this.users.get(index),(Integer) xCoordonate - radius1 + 10);
+            hashMapY.put(this.users.get(index),(Integer) yCoordonate - radius1+25);
         }
     }
     public void paintFriendship(Graphics2D g2d)
@@ -76,6 +76,7 @@ public class TestSVGGen{
             {
                 for(User friend: user.getFriends())
                 {
+                    g2d.setPaint(Color.green);
                     g2d.drawLine(hashMapX.get(user),hashMapY.get(user),hashMapX.get(friend),hashMapY.get(friend));
                 }
             }
