@@ -45,35 +45,30 @@ class ClientThread extends Thread {
                 this.commandCounter += 1;
 
                 if (requestArguments[0].equals(read) && this.loggedUserName != null) {
-
                     CommandRead commandRead= new CommandRead(runningServerSocket);
-                    System.out.println(commandRead.readMessages(this.loggedUserName));
-
-                    String raspuns = "serverClasses.Server received the request " + request + ".";
+                    String raspuns = commandRead.readMessages(this.loggedUserName);
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(send) && this.loggedUserName != null) {
 
+                } else if (requestArguments[0].equals(send) && this.loggedUserName != null) {
                     String message = "";
                     for (int index = 1; index < requestArguments.length; index++)
                         message = message + " " + requestArguments[index];
-
                     CommandSend commandSend = new CommandSend(runningServerSocket);
                     commandSend.sendMessage(message, this.loggedUserName);
-
                     String raspuns = "serverClasses.Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(friend) && this.loggedUserName != null) {
 
+                } else if (requestArguments[0].equals(friend) && this.loggedUserName != null) {
                     CommandFriend commandFriend = new CommandFriend(runningServerSocket);
                     for (int index = 1; index < requestArguments.length; index++)
                         commandFriend.addFriend(this.loggedUserName, requestArguments[index]);
                     String raspuns = "Server received the request " + request + ".";
                     output.println(raspuns);
                     output.flush();
-                } else if (requestArguments[0].equals(login)) {
 
+                } else if (requestArguments[0].equals(login)) {
                     CommandLogin commandLogin = new CommandLogin(runningServerSocket);
                     if (commandLogin.verify(requestArguments[1])) {
                         this.loggedUserName = requestArguments[1];
@@ -84,9 +79,9 @@ class ClientThread extends Thread {
                         output.println(raspuns);
                     }
                     output.flush();
+
                 } else if (requestArguments[0].equals(register)) {
                     CommandRegister commandRegister = new CommandRegister(runningServerSocket);
-
                     if (!commandRegister.verify(requestArguments[1])) {
                         commandRegister.addUser(requestArguments[1]);
                         String raspuns = "You did registered as " + requestArguments[1] + ".";
@@ -97,8 +92,8 @@ class ClientThread extends Thread {
                         output.println(raspuns);
                     }
                     output.flush();
-                } else if (requestArguments[0].equals(exit)) {
 
+                } else if (requestArguments[0].equals(exit)) {
                     String raspuns = "You did exit from the serer!";
                     output.println(raspuns);
                     output.flush();
@@ -108,6 +103,7 @@ class ClientThread extends Thread {
                         System.err.println(e);
                     }
                     break;
+
                 } else if (requestArguments[0].equals(stop)) {
                     String raspuns = "Server stopped!";
                     output.println(raspuns);
