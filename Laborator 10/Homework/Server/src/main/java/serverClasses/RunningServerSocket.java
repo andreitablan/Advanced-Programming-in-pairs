@@ -12,6 +12,7 @@ import java.util.List;
 public class RunningServerSocket {
     public static int PORT = 0;
     public List<User> users = new ArrayList<User>();
+    public boolean running=true;
 
     public RunningServerSocket(int PORT) throws IOException {
         RunningServerSocket.PORT = PORT;
@@ -21,7 +22,7 @@ public class RunningServerSocket {
         try {
             serverSocket = new ServerSocket(PORT);
 
-            while (true) {
+            while (running) {
                 System.out.println("Waiting for a client ...");
                 Socket socket = serverSocket.accept();
                 ClientThread clientThread =new ClientThread(socket, this);
@@ -40,4 +41,7 @@ public class RunningServerSocket {
         }
     }
 
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
 }

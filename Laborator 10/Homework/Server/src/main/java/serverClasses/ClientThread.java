@@ -105,15 +105,10 @@ class ClientThread extends Thread {
                     break;
 
                 } else if (requestArguments[0].equals(stop)) {
-                    String raspuns = "Server stopped!";
+                    String raspuns = "Server will stop after exiting running clients!";
                     output.println(raspuns);
                     output.flush();
-                    try {
-                        socket.close();
-                        System.exit(0);
-                    } catch (IOException e) {
-                        System.err.println(e);
-                    }
+                    runningServerSocket.setRunning(false);
                 } else {
                     String raspuns = "Wrong command! Please send one of the following: register, login, friend, send, read, exit, stop.";
                     output.println(raspuns);
