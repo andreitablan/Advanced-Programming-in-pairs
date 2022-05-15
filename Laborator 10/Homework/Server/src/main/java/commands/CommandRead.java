@@ -1,4 +1,4 @@
 package commands;
 
-public class CommandRead {
+public class CommandRead extends AbstractCommand{
 }

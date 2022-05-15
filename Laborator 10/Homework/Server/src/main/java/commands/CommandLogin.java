@@ -1,4 +1,4 @@
 package commands;
 
-public class CommandLogin {
+public class CommandLogin extends AbstractCommand{
 }

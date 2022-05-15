@@ -1,4 +1,4 @@
 package commands;
 
-public class CommandSend {
+public class CommandSend extends AbstractCommand{
 }

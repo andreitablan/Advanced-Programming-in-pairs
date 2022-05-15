@@ -1,4 +1,4 @@
 package commands;
 
-public class CommandFriend {
+public class CommandFriend extends AbstractCommand{
 }
