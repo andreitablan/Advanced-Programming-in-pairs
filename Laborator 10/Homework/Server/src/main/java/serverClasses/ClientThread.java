@@ -1,6 +1,7 @@
 package serverClasses;
 
 import commands.*;
+import utils.TestSVGGen;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +36,7 @@ class ClientThread extends Thread {
                 String friend = "friend";
                 String send = "send";
                 String read = "read";
+                String svg = "svg";
 
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String request = input.readLine();
@@ -109,7 +111,13 @@ class ClientThread extends Thread {
                     output.println(raspuns);
                     output.flush();
                     runningServerSocket.setRunning(false);
-                } else {
+                }else if(requestArguments[0].equals(svg)) {
+                    TestSVGGen testSVGGen=new TestSVGGen(runningServerSocket.users);
+                    String raspuns = "Exported the SVG.";
+                    output.println(raspuns);
+                    output.flush();
+                }
+                else {
                     String raspuns = "Wrong command! Please send one of the following: register, login, friend, send, read, exit, stop.";
                     output.println(raspuns);
                     output.flush();

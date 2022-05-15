@@ -11,7 +11,6 @@ public class Server {
     public Server() throws IOException {
         RunningServerSocket socket = new RunningServerSocket(PORT);
     }
-
     public static void main(String[] args) throws IOException {
         Server server = new Server();
     }
