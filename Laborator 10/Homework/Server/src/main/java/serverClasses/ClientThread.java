@@ -3,6 +3,8 @@ package serverClasses;
 import commands.*;
 import utils.SVGGenerator;
 
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -127,6 +129,8 @@ class ClientThread extends Thread {
             }
         } catch (IOException e) {
             System.err.println("Communication error" + e);
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
         }
     }
 

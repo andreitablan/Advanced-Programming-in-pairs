@@ -5,9 +5,7 @@ import serverClasses.*;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +15,8 @@ import org.apache.batik.dom.GenericDOMImplementation;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.DOMImplementation;
+
+import javax.xml.transform.TransformerException;
 
 /**
  * This method generates the social network in a Scalable Vector Graphics format using an XML file.
@@ -32,7 +32,7 @@ public class SVGGenerator {
     int radius = 4 * math / 5;
     int radius1 = Math.abs(math - radius) / 2;
 
-    public SVGGenerator(List<User> users) throws SVGGraphics2DIOException, UnsupportedEncodingException {
+    public SVGGenerator(List<User> users) throws IOException, TransformerException {
         this.users = users;
 
         DOMImplementation domImplementation = GenericDOMImplementation.getDOMImplementation();
@@ -46,8 +46,12 @@ public class SVGGenerator {
         this.paintFriendship(svgGenerator);
 
         boolean useCSS = true;
-        Writer outputStreamWriter = new OutputStreamWriter(System.out, "UTF-8");
+
+        OutputStream outputStream  = new FileOutputStream("C:\\PA_2022\\FII_PA_LeaganDan_TablanAndrei\\Laborator 10\\Homework\\XML files\\generatedSVG.xml");
+        Writer outputStreamWriter = new OutputStreamWriter(outputStream);
+
         svgGenerator.stream(outputStreamWriter, useCSS);
+        outputStreamWriter.close();
     }
 
     /**
