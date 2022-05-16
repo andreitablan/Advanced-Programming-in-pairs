@@ -9,16 +9,14 @@ import java.time.Instant;
  */
 public class Timekeeper implements Runnable {
 
-    float timeAccumulator;
     float frameTime;
     private Instant start;
-    private int timeLimit = 1000000;
+    private int timeLimit = 100000;
     private ClientThread clientThread;
     private int commandCounter = 0;
 
     public Timekeeper(float frameTime, ClientThread clientThread) {
         this.clientThread = clientThread;
-        timeAccumulator = 0;
         this.frameTime = frameTime;
     }
 
