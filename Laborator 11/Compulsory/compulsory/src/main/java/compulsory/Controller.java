@@ -21,7 +21,7 @@ public class Controller {
     }
 
 
-    @RequestMapping("/person/all")
+    @RequestMapping("/person/getAll")
     public List<Person> getPersons() {
         return persons;
     }
