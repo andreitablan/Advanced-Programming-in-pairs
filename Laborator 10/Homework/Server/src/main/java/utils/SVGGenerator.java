@@ -64,8 +64,8 @@ public class SVGGenerator {
             graphics2D.setFont(graphics2D.getFont().deriveFont(15f));
             graphics2D.setPaint(Color.blue);
             graphics2D.drawString(this.users.get(index).getName(), xCoordonate - radius1 + 10, yCoordonate - radius1 + 25);
-            hashMapX.put(this.users.get(index), (Integer) xCoordonate - radius1 + 10);
-            hashMapY.put(this.users.get(index), (Integer) yCoordonate - radius1 + 25);
+            hashMapX.put(this.users.get(index), xCoordonate - radius1 + 10);
+            hashMapY.put(this.users.get(index), yCoordonate - radius1 + 25);
         }
     }
 
