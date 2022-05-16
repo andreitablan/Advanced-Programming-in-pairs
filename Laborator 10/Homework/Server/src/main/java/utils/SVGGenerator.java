@@ -18,6 +18,9 @@ import org.apache.batik.dom.GenericDOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DOMImplementation;
 
+/**
+ * This method generates the social network in a Scalable Vector Graphics format using an XML file.
+ */
 public class SVGGenerator {
 
     private List<User> users = new ArrayList<User>();
@@ -47,6 +50,10 @@ public class SVGGenerator {
         svgGenerator.stream(outputStreamWriter, useCSS);
     }
 
+    /**
+     * This method paints a user and retains the coordinates.
+     * @param graphics2D
+     */
     public void paintPoints(Graphics2D graphics2D) {
         for (int index = 0; index < this.users.size(); index++) {
             double tangent = 2 * Math.PI * index / this.users.size();
@@ -62,6 +69,10 @@ public class SVGGenerator {
         }
     }
 
+    /**
+     * This method paints the users friendships.
+     * @param graphics2D
+     */
     public void paintFriendship(Graphics2D graphics2D) {
         for (User user : users) {
             for (User friend : user.getFriends()) {

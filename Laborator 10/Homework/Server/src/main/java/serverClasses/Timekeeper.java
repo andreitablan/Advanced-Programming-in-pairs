@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
+/**
+ * This class measure the time for a specific user.
+ */
 public class Timekeeper implements Runnable {
 
     float timeAccumulator;
@@ -19,6 +22,9 @@ public class Timekeeper implements Runnable {
         this.frameTime = frameTime;
     }
 
+    /**
+     * This method counts the time.
+     */
     public void run() {
         if (Thread.currentThread().isDaemon()) {
             start = Instant.now();
@@ -42,10 +48,6 @@ public class Timekeeper implements Runnable {
                     break;
                 }
             }
-
-
         }
-
-
     }
 }

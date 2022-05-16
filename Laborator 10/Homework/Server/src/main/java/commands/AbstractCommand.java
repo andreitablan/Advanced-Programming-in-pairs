@@ -1,9 +1,9 @@
 package commands;
-
 import serverClasses.RunningServerSocket;
 
-import java.io.Serializable;
-
+/**
+ * This class is used for implementing the OOP modeling.
+ */
 public abstract class AbstractCommand {
     protected RunningServerSocket runningServerSocket;
 

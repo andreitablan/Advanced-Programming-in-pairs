@@ -14,15 +14,18 @@ import java.net.Socket;
  */
 class ClientThread extends Thread {
     public Socket socket = null;
-    private int commandCounter = 0;
     public String loggedUserName = null;
     public RunningServerSocket runningServerSocket = null;
+    private int commandCounter = 0;
 
     public ClientThread(Socket socket, RunningServerSocket runningServerSocket) {
         this.socket = socket;
         this.runningServerSocket = runningServerSocket;
     }
 
+    /**
+     * This is the method for running the client thread.
+     */
     public void run() {
         try {
             while (true) {
@@ -46,8 +49,8 @@ class ClientThread extends Thread {
 
                 if (requestArguments[0].equals(read) && this.loggedUserName != null) {
                     CommandRead commandRead = new CommandRead(runningServerSocket);
-                    String raspuns = commandRead.readMessages(this.loggedUserName);
-                    output.println(raspuns);
+                    String answer = commandRead.readMessages(this.loggedUserName);
+                    output.println(answer);
                     output.flush();
 
                 } else if (requestArguments[0].equals(send) && this.loggedUserName != null) {
@@ -56,27 +59,27 @@ class ClientThread extends Thread {
                         message = message + " " + requestArguments[index];
                     CommandSend commandSend = new CommandSend(runningServerSocket);
                     commandSend.sendMessage(message, this.loggedUserName);
-                    String raspuns = "serverClasses.Server received the request " + request + ".";
-                    output.println(raspuns);
+                    String answer = "Server received the request " + request + ".";
+                    output.println(answer);
                     output.flush();
 
                 } else if (requestArguments[0].equals(friend) && this.loggedUserName != null) {
                     CommandFriend commandFriend = new CommandFriend(runningServerSocket);
                     for (int index = 1; index < requestArguments.length; index++)
                         commandFriend.addFriend(this.loggedUserName, requestArguments[index]);
-                    String raspuns = "Server received the request " + request + ".";
-                    output.println(raspuns);
+                    String answer = "Server received the request " + request + ".";
+                    output.println(answer);
                     output.flush();
 
                 } else if (requestArguments[0].equals(login)) {
                     CommandLogin commandLogin = new CommandLogin(runningServerSocket);
                     if (commandLogin.verify(requestArguments[1])) {
                         this.loggedUserName = requestArguments[1];
-                        String raspuns = "You did login as " + requestArguments[1] + ".";
-                        output.println(raspuns);
+                        String answer = "You did login as " + requestArguments[1] + ".";
+                        output.println(answer);
                     } else {
-                        String raspuns = "The user " + requestArguments[1] + " does not exist!";
-                        output.println(raspuns);
+                        String answer = "The user " + requestArguments[1] + " does not exist!";
+                        output.println(answer);
                     }
                     output.flush();
 
@@ -84,18 +87,18 @@ class ClientThread extends Thread {
                     CommandRegister commandRegister = new CommandRegister(runningServerSocket);
                     if (!commandRegister.verify(requestArguments[1])) {
                         commandRegister.addUser(requestArguments[1]);
-                        String raspuns = "You did registered as " + requestArguments[1] + ".";
-                        output.println(raspuns);
+                        String answer = "You did registered as " + requestArguments[1] + ".";
+                        output.println(answer);
                         this.loggedUserName = requestArguments[1];
                     } else {
-                        String raspuns = "The user " + requestArguments[1] + " already exists!";
-                        output.println(raspuns);
+                        String answer = "The user " + requestArguments[1] + " already exists!";
+                        output.println(answer);
                     }
                     output.flush();
 
                 } else if (requestArguments[0].equals(exit)) {
-                    String raspuns = "You did exit from the serer!";
-                    output.println(raspuns);
+                    String answer = "You did exit from the serer!";
+                    output.println(answer);
                     output.flush();
                     try {
                         socket.close();
@@ -105,18 +108,20 @@ class ClientThread extends Thread {
                     break;
 
                 } else if (requestArguments[0].equals(stop)) {
-                    String raspuns = "Server will stop after exiting running clients!";
-                    output.println(raspuns);
+                    String answer = "Server will stop after exiting running clients!";
+                    output.println(answer);
                     output.flush();
                     runningServerSocket.setRunning(false);
+
                 } else if (requestArguments[0].equals(svg)) {
                     SVGGenerator svgGenerator = new SVGGenerator(runningServerSocket.users);
-                    String raspuns = "Exported the SVG.";
-                    output.println(raspuns);
+                    String answer = "Exported the SVG.";
+                    output.println(answer);
                     output.flush();
+
                 } else {
-                    String raspuns = "Wrong command! Please send one of the following: register, login, friend, send, read, exit, stop.";
-                    output.println(raspuns);
+                    String answer = "Wrong command! Please send one of the following: register, login, friend, send, read, exit, stop, svg.";
+                    output.println(answer);
                     output.flush();
                 }
             }

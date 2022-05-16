@@ -6,6 +6,9 @@ import serverClasses.User;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class is responsible for executing the read command.
+ */
 public class CommandRead extends AbstractCommand {
     private User user;
     private List<User> friends;
@@ -15,6 +18,11 @@ public class CommandRead extends AbstractCommand {
         super(runningServerSocket);
     }
 
+    /**
+     * This method returns the received messages for a specific user.
+     * @param name
+     * @return
+     */
     public String readMessages(String name) {
 
         String returnedMessages = "";
