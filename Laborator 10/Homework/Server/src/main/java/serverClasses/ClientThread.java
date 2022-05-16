@@ -1,15 +1,13 @@
 package serverClasses;
 
 import commands.*;
-import utils.TestSVGGen;
+import utils.SVGGenerator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 
 /**
  * This is the class responsible with a client Thread
@@ -112,7 +110,7 @@ class ClientThread extends Thread {
                     output.flush();
                     runningServerSocket.setRunning(false);
                 } else if (requestArguments[0].equals(svg)) {
-                    TestSVGGen testSVGGen = new TestSVGGen(runningServerSocket.users);
+                    SVGGenerator svgGenerator = new SVGGenerator(runningServerSocket.users);
                     String raspuns = "Exported the SVG.";
                     output.println(raspuns);
                     output.flush();
