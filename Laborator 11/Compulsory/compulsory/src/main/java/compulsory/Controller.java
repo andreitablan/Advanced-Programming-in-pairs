@@ -12,9 +12,7 @@ import java.util.List;
 public class Controller {
 
     private final List<Person> persons = new ArrayList<>();
-
-
-    @Autowired
+    
     public Controller() {
         persons.add(new Person(1, "Dan"));
         persons.add(new Person(2, "Adrian"));
