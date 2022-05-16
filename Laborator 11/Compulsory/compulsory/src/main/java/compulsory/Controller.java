@@ -1,7 +1,9 @@
 package compulsory;
 
+import entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import repository.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,19 @@ import java.util.List;
 public class Controller {
 
     private final List<Person> persons = new ArrayList<>();
+    PersonService personService;
 
-    public Controller() {
+    @Autowired
+    public Controller(PersonService personService) {
         persons.add(new Person(1, "Dan"));
         persons.add(new Person(2, "Adrian"));
+        this.personService = personService;
+    }
+
+
+    @RequestMapping("/test")
+    public List<Person> test(){
+       return this.personService.personRepository.findAll();
     }
 
     @RequestMapping("/person/all")
