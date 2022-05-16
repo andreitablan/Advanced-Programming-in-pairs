@@ -1,6 +1,5 @@
 package entity;
 
-import repository.*;
 import javax.persistence.*;
 
 @Entity
