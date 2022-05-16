@@ -12,7 +12,6 @@ public class Controller {
 
     private final List<Person> persons = new ArrayList<>();
 
-
     public Controller() {
         persons.add(new Person(1, "Dan"));
         persons.add(new Person(2, "Adrian"));
