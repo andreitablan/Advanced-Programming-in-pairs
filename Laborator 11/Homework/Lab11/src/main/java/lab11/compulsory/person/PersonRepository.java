@@ -10,4 +10,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     public abstract Person findByName(String name);
     @Query("SELECT T FROM Person T WHERE T.id=?1")
     public abstract Person findById(long id);
+
 }

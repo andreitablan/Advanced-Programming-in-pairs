@@ -12,8 +12,7 @@ import javax.transaction.Transactional;
 public interface FriendshipRepository extends JpaRepository<Friendship1,Long> {
 
     @Modifying
-    @Query(value = "insert into Friendship1 (id,id_Person1,id_Person2) values (101, :idPerson1, :idPerson2)", nativeQuery = true)
+    @Query(value = "insert into Friendship1 (id,id_Person1,id_Person2) values (:id, :idPerson1, :idPerson2)", nativeQuery = true)
     @Transactional
-    void logFriendship(@Param("idPerson1") Long idPerson1, @Param("idPerson2") Long idPerson2);
+    void logFriendship(@Param("id") Long id,@Param("idPerson1") Long idPerson1, @Param("idPerson2") Long idPerson2);
 }
-

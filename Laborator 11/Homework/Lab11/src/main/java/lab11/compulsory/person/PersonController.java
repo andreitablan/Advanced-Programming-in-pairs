@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PersonController {
@@ -56,13 +57,17 @@ public class PersonController {
     }
 
     @PostMapping("add/friend")
-    public void addFriend(@RequestParam(name="id1") long id1,@RequestParam(name="id2") long id2){
-       Person person1= personService.findById(id1);
-       Person person2=personService.findById(id2);
-        personService.save(person1,person2);
+    public void addFriend(@RequestParam(name="id") long id,@RequestParam(name="id1") long id1,@RequestParam(name="id2") long id2){
+
+        Person person1= personService.findById(id1);
+        Person person2= personService.findById(id2);
+        personService.save(id,person1,person2);
     }
 
     @GetMapping("get/friend")
     public List<Friendship1> getFriendships(){return personService.findAllFriendships();}
+
+    @GetMapping("getpopular/friend")
+    public List<Optional<Person>> getPopular(@RequestParam(name="popularPeople") int popularPeople){ return personService.findMostPopular(popularPeople);}
 
 }
