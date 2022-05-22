@@ -67,7 +67,7 @@ public class PersonController {
     @GetMapping("get/friend")
     public List<Friendship1> getFriendships(){return personService.findAllFriendships();}
 
-    @GetMapping("getpopular/friend")
+    @GetMapping("getPopular/friend")
     public List<Optional<Person>> getPopular(@RequestParam(name="popularPeople") int popularPeople){ return personService.findMostPopular(popularPeople);}
 
 }
