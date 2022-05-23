@@ -105,19 +105,4 @@ public class DepartmentController {
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, String.class, id);
 
     }
-
-      @PostMapping("/add/person")
-          public ResponseEntity<String> addPerson (){
-              String url="http://localhost:5500/add/person";
-
-              HttpHeaders headers = new HttpHeaders();
-              headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-              String nume= "Raul";
-
-              HttpEntity<String> request = new HttpEntity<String>(nume, headers);
-
-              ResponseEntity<String> response = restTemplate.postForEntity( url, request , String.class );
-              return response;
-          }
 }
