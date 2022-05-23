@@ -42,6 +42,5 @@ public class ClassHandler {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
