@@ -1,5 +1,6 @@
 package homework.ClientApplication;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -105,5 +106,18 @@ public class DepartmentController {
 
     }
 
+      @PostMapping("/add/person")
+          public ResponseEntity<String> addPerson (){
+              String url="http://localhost:5500/add/person";
 
+              HttpHeaders headers = new HttpHeaders();
+              headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+              String nume= "Raul";
+
+              HttpEntity<String> request = new HttpEntity<String>(nume, headers);
+
+              ResponseEntity<String> response = restTemplate.postForEntity( url, request , String.class );
+              return response;
+          }
 }
