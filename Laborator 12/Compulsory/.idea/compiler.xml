@@ -6,8 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Compulsory" />
-        <module name="compulsory1" />
+        <module name="TestCompulsory" />
       </profile>
     </annotationProcessing>
   </component>
