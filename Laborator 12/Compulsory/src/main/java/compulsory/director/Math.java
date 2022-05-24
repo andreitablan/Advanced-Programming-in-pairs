@@ -1,10 +1,8 @@
-package compulsory;
+package compulsory.director;
 
 import org.testng.annotations.Test;
 
 public class Math {
-
-    private int number = 6;
 
     public Math(){
 
@@ -21,10 +19,5 @@ public class Math {
     @Test
     public static void helloworld(){
         System.out.println("hello");
-    }
-
-    @Test
-    public static void printNumberString(int number1, String name1){
-        System.out.println(number1 + " and " + name1);
     }
 }
