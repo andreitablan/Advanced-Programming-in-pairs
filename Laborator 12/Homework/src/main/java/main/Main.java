@@ -9,11 +9,11 @@ public class Main {
             ClassHandler classHandler = new ClassHandler();
             classHandler.run();
 
-            File directory=new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\Compulsory\\target\\classes\\compulsory");
+            File directory=new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\TestedClasses\\Compulsory\\target\\classes\\compulsory");
             DirectoryHandler directoryHandler = new DirectoryHandler(directory);
             directoryHandler.loadClass(directory);
 
-            File directoryForTests = new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\Compulsory\\target\\test-classes\\compulsory");
+            File directoryForTests = new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\TestedClasses\\Compulsory\\target\\test-classes\\compulsory");
             TestHandler testHandler=new TestHandler(directoryForTests);
             testHandler.loadTest(directoryForTests);
         }

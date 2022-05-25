@@ -15,7 +15,7 @@ public class ClassHandler {
 
     public void run() {
         try {
-            File file = new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\Compulsory\\target\\classes");
+            File file = new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\TestedClasses\\Compulsory\\target\\classes");
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
 

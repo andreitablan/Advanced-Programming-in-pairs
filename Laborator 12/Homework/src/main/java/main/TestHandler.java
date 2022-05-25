@@ -37,7 +37,7 @@ public class TestHandler {
                     for(Method method:methods){
                         System.out.println("\nName: " + method.getName());
                         System.out.println("Declaring Class: " + method.getDeclaringClass());
-                        System.out.println("Return Type" + method.getAnnotatedReturnType());
+                        System.out.println("Return Type: " + method.getAnnotatedReturnType());
                     }
                 }
             }
