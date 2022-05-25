@@ -13,5 +13,8 @@ public class Main {
             DirectoryHandler directoryHandler = new DirectoryHandler(directory);
             directoryHandler.loadClass(directory);
 
+            File directoryForTests = new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\Compulsory\\target\\test-classes\\compulsory");
+            TestHandler testHandler=new TestHandler(directoryForTests);
+            testHandler.loadTest(directoryForTests);
         }
 }
