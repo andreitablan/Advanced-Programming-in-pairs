@@ -28,11 +28,12 @@ public class DiscordBot extends ListenerAdapter{
                         response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
                     });
         }
-        else if(msg.getContentRaw().equals("q")){
+        else if(msg.getContentRaw().charAt(0) == '!'){
+            String msgString=msg.getContentRaw().substring(1);
             MessageChannel channel=event.getChannel();
             AnswersRepository answersRepository=new AnswersRepository();
-            channel.sendMessage(answersRepository.findById(1))
-                    .queue(response -> response.editMessageFormat(answersRepository.findById(1)));
+                channel.sendMessage(answersRepository.findByQuestion(msgString))
+                        .queue(response -> response.editMessageFormat(answersRepository.findByQuestion(msgString)));
         }
     }
 
