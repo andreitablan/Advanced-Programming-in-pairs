@@ -25,6 +25,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.6.5.Final</version>
         </dependency>
+        <dependency>
+            <groupId>rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <properties>
