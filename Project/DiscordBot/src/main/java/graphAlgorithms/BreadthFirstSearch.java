@@ -28,6 +28,7 @@ public class BreadthFirstSearch {
     private void addEdge(int vertex1, int vertex2)
     {
         listOfNeighbours[vertex1].add(vertex2);
+        listOfNeighbours[vertex2].add(vertex1);
     }
 
     void BFS(int vertex)
