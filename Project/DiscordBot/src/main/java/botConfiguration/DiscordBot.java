@@ -16,32 +16,60 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import rssReader.RssReader;
+import timekeeper.TimekeeperMilliseconds;
+import timekeeper.TimekeeperSeconds;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 
-public class DiscordBot extends ListenerAdapter{
+public class DiscordBot extends ListenerAdapter {
+
+    private TimekeeperSeconds timekeeperSeconds;
+    private TimekeeperMilliseconds timekeeperMilliseconds;
+    private Thread threadTimerSeconds;
+    private Thread threadTimerMilliseconds;
+
+    public DiscordBot() {
+
+        this.timekeeperSeconds = new TimekeeperSeconds();
+        this.threadTimerSeconds = new Thread(timekeeperSeconds);
+        threadTimerSeconds.setDaemon(true);
+
+        this.timekeeperMilliseconds = new TimekeeperMilliseconds();
+        this.threadTimerMilliseconds = new Thread(timekeeperMilliseconds);
+        threadTimerMilliseconds.setDaemon(true);
+
+        threadTimerSeconds.start();
+        threadTimerMilliseconds.start();
+
+    }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         Message message = event.getMessage();
         if (message.getContentRaw().equals("!help")) {
             MessageChannel channel = event.getChannel();
-            String output="You asked for help! \n" +
+            String output = "You asked for help! \n" +
                     "You can use the following commands: \n" +
-                    "1. rss:<url> \n"+
+                    "1. rss:<url> \n" +
                     "2. !<question>\n" +
                     "3. dfs: <number of nodes> <starting node> <edges>\n" +
                     "4. bfs: <number of nodes> <starting node> <edges>\n" +
                     "5. connected: <number of nodes> <edges>";
             channel.sendMessage(output).queue();
+        } else if (message.getContentRaw().equals("!seconds")) {
+            MessageChannel channel = event.getChannel();
+            channel.sendMessage(timekeeperSeconds.getTimeElapsed()).queue();
+        } else if (message.getContentRaw().equals("!milliseconds")) {
+            MessageChannel channel = event.getChannel();
+            channel.sendMessage(timekeeperMilliseconds.getTimeElapsed()).queue();
         } else if (message.getContentRaw().charAt(0) == '!') {
             String msgString = message.getContentRaw().substring(1);
             MessageChannel channel = event.getChannel();
             AnswersRepository answersRepository = new AnswersRepository();
             channel.sendMessage(answersRepository.findByQuestion(msgString)).queue();
-        } else if (message.getContentRaw().substring(0,4).equals("rss:")) {
+        } else if (message.getContentRaw().substring(0, 4).equals("rss:")) {
             String link = message.getContentRaw().substring(4);
             try {
                 RssReader rssReader = new RssReader();
@@ -53,31 +81,28 @@ public class DiscordBot extends ListenerAdapter{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else if (message.getContentRaw().substring(0,4).equals("dfs:")) {
+        } else if (message.getContentRaw().substring(0, 4).equals("dfs:")) {
             String input = message.getContentRaw().substring(5);
-            DepthFirstSearch depthFirstSearch=new DepthFirstSearch(input);
+            DepthFirstSearch depthFirstSearch = new DepthFirstSearch(input);
             MessageChannel channel = event.getChannel();
             channel.sendMessage(depthFirstSearch.getNodes()).queue();
-        }
-        else if (message.getContentRaw().substring(0,4).equals("bfs:")) {
+        } else if (message.getContentRaw().substring(0, 4).equals("bfs:")) {
             String input = message.getContentRaw().substring(5);
-            BreadthFirstSearch breadthFirstSearch=new BreadthFirstSearch(input);
+            BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch(input);
             MessageChannel channel = event.getChannel();
             channel.sendMessage(breadthFirstSearch.getNodes()).queue();
-        }
-        else if (message.getContentRaw().substring(0,10).equals("connected:")) {
+        } else if (message.getContentRaw().substring(0, 10).equals("connected:")) {
             String input = message.getContentRaw().substring(11);
-            ConnectedGraph connectedGraph=new ConnectedGraph();
+            ConnectedGraph connectedGraph = new ConnectedGraph();
             MessageChannel channel = event.getChannel();
             channel.sendMessage(connectedGraph.checkConnected(input)).queue();
-        }
-        else if (message.getContentRaw().substring(0,5).equals("draw:")) {
+        } else if (message.getContentRaw().substring(0, 5).equals("draw:")) {
             String input = message.getContentRaw().substring(6);
-            NodesManager nodesManager=new NodesManager();
+            NodesManager nodesManager = new NodesManager();
             nodesManager.manageNodes(input);
             MessageChannel channel = event.getChannel();
             try {
-                DrawGraph drawGraph=new DrawGraph(nodesManager.getNodeList());
+                DrawGraph drawGraph = new DrawGraph(nodesManager.getNodeList());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
