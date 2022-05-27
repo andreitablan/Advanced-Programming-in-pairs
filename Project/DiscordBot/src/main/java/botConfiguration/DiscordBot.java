@@ -57,9 +57,10 @@ public class DiscordBot extends ListenerAdapter {
                     "3. dfs: <number of nodes> <starting node> <edges>\n" +
                     "4. bfs: <number of nodes> <starting node> <edges>\n" +
                     "5. connected: <number of nodes> <edges>\n" +
-                    "6. !seconds\n" +
-                    "7. !miliseconds\n" +
-                    "8. !help";
+                    "6. draw: <number of nodes> <edges>\n" +
+                    "7. !seconds \n" +
+                    "8. !miliseconds \n" +
+                    "9. !help";
             channel.sendMessage(output).queue();
         } else if (message.getContentRaw().equals("!seconds")) {
             MessageChannel channel = event.getChannel();
