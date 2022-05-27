@@ -30,4 +30,5 @@ public class Node {
     public void setNeighbours(List<Node> neighbours) {
         this.neighbours = neighbours;
     }
+
 }
