@@ -1,4 +1,4 @@
 package graphAlgorithms;
 
-public class DFS {
+public class BFS {
 }
