@@ -62,5 +62,5 @@ Functia **!milliseconds** returneaza numarul de milisecunde de cand a fost porni
 
 
 ## Autori
-Leagan Dan-Adrian
+Leagan Dan-Adrian <br />
 Tablan Andrei-Razvan
