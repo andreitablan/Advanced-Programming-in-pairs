@@ -4,12 +4,14 @@ import com.sun.syndication.io.FeedException;
 import dataBase.*;
 import drawImage.DrawGraph;
 import drawImage.NodesManager;
+import exceptions.QuestionNotFoundException;
 import graphAlgorithms.BreadthFirstSearch;
 import graphAlgorithms.ConnectedGraph;
 import graphAlgorithms.DepthFirstSearch;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -72,20 +74,26 @@ public class DiscordBot extends ListenerAdapter {
             String msgString = message.getContentRaw().substring(1);
             MessageChannel channel = event.getChannel();
             AnswersRepository answersRepository = new AnswersRepository();
-            channel.sendMessage(answersRepository.findByQuestion(msgString)).queue();
-        } else if (message.getContentRaw().substring(0, 4).equals("rss:")) {
+            try {
+                channel.sendMessage(answersRepository.findByQuestion(msgString)).queue();
+            } catch (Exception exception) {
+                try {
+                    throw new QuestionNotFoundException(msgString, channel);
+                } catch (QuestionNotFoundException exception1) {
+                    exception1.printStackTrace();
+                }
+            }
+        } else if (message.getContentRaw().substring(0, 4).equals("rss:")){
             String link = message.getContentRaw().substring(4);
             try {
                 RssReader rssReader = new RssReader();
                 String answer = rssReader.readRss(link);
                 MessageChannel channel = event.getChannel();
                 channel.sendMessage(answer).queue();
-            } catch (FeedException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
+            } catch (FeedException | IOException e) {
                 throw new RuntimeException(e);
             }
-        } else if (message.getContentRaw().substring(0, 4).equals("dfs:")) {
+        } else if (message.getContentRaw().substring(0, 4).equals("dfs:")){
             String input = message.getContentRaw().substring(5);
             DepthFirstSearch depthFirstSearch = new DepthFirstSearch(input);
             MessageChannel channel = event.getChannel();
@@ -100,7 +108,7 @@ public class DiscordBot extends ListenerAdapter {
             ConnectedGraph connectedGraph = new ConnectedGraph();
             MessageChannel channel = event.getChannel();
             channel.sendMessage(connectedGraph.checkConnected(input)).queue();
-        } else if (message.getContentRaw().substring(0, 5).equals("draw:")) {
+        } else if (message.getContentRaw().substring(0, 5).equals("draw:")){
             String input = message.getContentRaw().substring(6);
             NodesManager nodesManager = new NodesManager();
             nodesManager.manageNodes(input);
