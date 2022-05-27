@@ -11,7 +11,5 @@ public class Main {
     public static void main(String[] args) throws LoginException, InterruptedException, IOException, FeedException {
         AnswersRepository answersRepository = new AnswersRepository();
         new DiscordBot().run();
-        RssReader rssReader=new RssReader();
-        //rssReader.readRss();
     }
 }

@@ -15,3 +15,4 @@ public class AnswersRepository {
         return Manager.getInstance().getManager().createNamedQuery("AnswersEntity.findAll",AnswersEntity.class).getResultList();
     }
 }
+

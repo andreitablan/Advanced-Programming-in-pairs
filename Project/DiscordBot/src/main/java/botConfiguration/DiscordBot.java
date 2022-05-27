@@ -1,5 +1,6 @@
 package botConfiguration;
 
+import com.sun.syndication.io.FeedException;
 import dataBase.*;
 import dataBase.Manager;
 import net.dv8tion.jda.api.JDA;
@@ -10,8 +11,10 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import rssReader.RssReader;
 
 import javax.security.auth.login.LoginException;
+import java.io.IOException;
 
 public class DiscordBot extends ListenerAdapter{
 
@@ -32,8 +35,21 @@ public class DiscordBot extends ListenerAdapter{
             String msgString=msg.getContentRaw().substring(1);
             MessageChannel channel=event.getChannel();
             AnswersRepository answersRepository=new AnswersRepository();
-                channel.sendMessage(answersRepository.findByQuestion(msgString))
-                        .queue(response -> response.editMessageFormat(answersRepository.findByQuestion(msgString)));
+            channel.sendMessage(answersRepository.findByQuestion(msgString))
+                    .queue(response -> response.editMessageFormat(answersRepository.findByQuestion(msgString)));
+        }
+        else if(msg.getContentRaw().charAt(0) == 'r' && msg.getContentRaw().charAt(1) == 's' && msg.getContentRaw().charAt(2) == 's' && msg.getContentRaw().charAt(3) == ':') {
+            String link=msg.getContentRaw().substring(4);
+            try {
+                RssReader rssReader = new RssReader();
+                String answer=rssReader.readRss(link);
+                MessageChannel channel=event.getChannel();
+                channel.sendMessage( answer ).queue(response -> response.editMessageFormat(answer));
+            } catch (FeedException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
