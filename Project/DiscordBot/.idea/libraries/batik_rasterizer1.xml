@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="batik-rasterizer1">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/lib/batik-1.7/batik-rasterizer.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/ojdbc11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
