@@ -3,6 +3,7 @@ package botConfiguration;
 import com.sun.syndication.io.FeedException;
 import dataBase.*;
 import dataBase.Manager;
+import drawXML.NodesManager;
 import graphAlgorithms.BreadthFirstSearch;
 import graphAlgorithms.ConnectedGraph;
 import graphAlgorithms.DepthFirstSearch;
@@ -68,6 +69,13 @@ public class DiscordBot extends ListenerAdapter{
             ConnectedGraph connectedGraph=new ConnectedGraph();
             MessageChannel channel = event.getChannel();
             channel.sendMessage(connectedGraph.checkConnected(input)).queue();
+        }
+        else if (message.getContentRaw().substring(0,5).equals("draw:")) {
+            String input = message.getContentRaw().substring(6);
+            NodesManager nodesManager=new NodesManager();
+            nodesManager.manageNodes(input);
+            MessageChannel channel = event.getChannel();
+            channel.sendMessage("Am primit comanda de afisare").queue();
         }
 
     }

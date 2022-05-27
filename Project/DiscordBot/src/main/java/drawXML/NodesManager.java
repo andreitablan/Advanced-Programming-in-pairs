@@ -41,4 +41,8 @@ public class NodesManager {
             }
         }
     }
+
+    public List<Node> getNodeList() {
+        return nodeList;
+    }
 }

@@ -1,10 +1,7 @@
 <component name="libraryTable">
-  <library name="ojdbc11">
+  <library name="batik-1.7">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/ojdbc11.jar!/" />
       <root url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1" />
-      <root url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1/batik-1.7.1" />
-      <root url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1/batik-1.7.1" />
     </CLASSES>
     <JAVADOC>
       <root url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1/batik-1.7.1/docs/docs/javadoc" />
@@ -13,6 +10,5 @@
       <root url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1/batik-1.7.1/docs/demo" />
       <root url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1/batik-1.7.1/samples/tests/resources/java/sources" />
     </SOURCES>
-    <jarDirectory url="file://$APPLICATION_HOME_DIR$/lib/batik-1.7.1/batik-1.7.1" recursive="false" />
   </library>
 </component>
