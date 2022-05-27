@@ -81,7 +81,7 @@ public class DiscordBot extends ListenerAdapter{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            channel.sendFile(new File("C:\\Users\\Dan\\Desktop\\rosu.png")).queue();
+            channel.sendFile(new File("C:\\Users\\andre\\Desktop\\graph.png")).queue();
         }
     }
 

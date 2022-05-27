@@ -24,14 +24,17 @@ public class DrawGraph extends JPanel {
     public DrawGraph(List<Node> nodeList) throws IOException {
 
         this.nodeList = nodeList;
-        BufferedImage bi = new BufferedImage(1400, 600, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(1400, 600, BufferedImage.TYPE_INT_ARGB);
 
-        Graphics2D ig2 = bi.createGraphics();
+        Graphics2D imageGraphics = bufferedImage.createGraphics();
 
-        this.paintNodes(ig2);
-        this.paintEdges(ig2);
+        imageGraphics.setPaint(Color.darkGray);
+        imageGraphics.fillRect(0,0,1400,600);
 
-        ImageIO.write(bi, "PNG", new File("C:\\Users\\Dan\\Desktop\\rosu.png"));
+        this.paintNodes(imageGraphics);
+        this.paintEdges(imageGraphics);
+
+        ImageIO.write(bufferedImage, "PNG", new File("C:\\Users\\andre\\Desktop\\graph.png"));
 
     }
 
@@ -40,11 +43,12 @@ public class DrawGraph extends JPanel {
             double tangent = 2 * Math.PI * index / this.nodeList.size();
             int xCoordonate = (int) Math.round(xMiddle + radius * Math.cos(tangent));
             int yCoordonate = (int) Math.round(yMiddle + radius * Math.sin(tangent));
-            graphics2D.setPaint(Color.red);
+
+            graphics2D.setPaint(Color.yellow);
             graphics2D.fillOval(xCoordonate - radius1, yCoordonate - radius1, 2 * radius1, 2 * radius1);
-            graphics2D.setFont(graphics2D.getFont().deriveFont(15f));
+            graphics2D.setFont(graphics2D.getFont().deriveFont(20f));
             graphics2D.setPaint(Color.blue);
-            graphics2D.drawString(String.valueOf(this.nodeList.get(index).getNumber()), xCoordonate - radius1 + 10, yCoordonate - radius1 + 25);
+            graphics2D.drawString(String.valueOf(this.nodeList.get(index).getNumber()), xCoordonate - radius1 + 20, yCoordonate - radius1 + 35);
             hashMapX.put(this.nodeList.get(index), xCoordonate - radius1 + 10);
             hashMapY.put(this.nodeList.get(index), yCoordonate - radius1 + 25);
         }
@@ -53,7 +57,8 @@ public class DrawGraph extends JPanel {
     public void paintEdges(Graphics2D graphics2D) {
         for (Node node : nodeList) {
             for (Node neighbour : node.getNeighbours()) {
-                graphics2D.setPaint(Color.green);
+                graphics2D.setPaint(Color.yellow);
+                graphics2D.setStroke(new BasicStroke(4));
                 graphics2D.drawLine(hashMapX.get(node), hashMapY.get(node), hashMapX.get(neighbour), hashMapY.get(neighbour));
             }
         }
