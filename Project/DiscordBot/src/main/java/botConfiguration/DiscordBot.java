@@ -3,6 +3,7 @@ package botConfiguration;
 import com.sun.syndication.io.FeedException;
 import dataBase.*;
 import dataBase.Manager;
+import graphAlgorithms.BreadthFirstSearch;
 import graphAlgorithms.DepthFirstSearch;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -52,6 +53,12 @@ public class DiscordBot extends ListenerAdapter{
             DepthFirstSearch dfs=new DepthFirstSearch(input);
             MessageChannel channel = event.getChannel();
             channel.sendMessage(dfs.getNodes()).queue(response -> response.editMessageFormat(dfs.getNodes()));
+        }
+        else if (msg.getContentRaw().substring(0,4).equals("bfs:")) {
+            String input = msg.getContentRaw().substring(5);//dfs: 4 2 0-1 0-2 1-2 2-0 2-3
+            BreadthFirstSearch bfs=new BreadthFirstSearch(input);
+            MessageChannel channel = event.getChannel();
+            channel.sendMessage(bfs.getNodes()).queue(response -> response.editMessageFormat(bfs.getNodes()));
         }
     }
 
