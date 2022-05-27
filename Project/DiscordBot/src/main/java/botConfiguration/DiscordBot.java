@@ -2,9 +2,8 @@ package botConfiguration;
 
 import com.sun.syndication.io.FeedException;
 import dataBase.*;
-import dataBase.Manager;
-import drawXML.DrawGraph;
-import drawXML.NodesManager;
+import drawImage.DrawGraph;
+import drawImage.NodesManager;
 import graphAlgorithms.BreadthFirstSearch;
 import graphAlgorithms.ConnectedGraph;
 import graphAlgorithms.DepthFirstSearch;
@@ -19,7 +18,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import rssReader.RssReader;
 
 import javax.security.auth.login.LoginException;
-import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
 
@@ -82,10 +80,8 @@ public class DiscordBot extends ListenerAdapter{
                 DrawGraph drawGraph=new DrawGraph(nodesManager.getNodeList());
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            } catch (TransformerException e) {
-                throw new RuntimeException(e);
             }
-            channel.sendFile(new File("C:\\Users\\andre\\Desktop\\graph.xml")).queue();
+            channel.sendFile(new File("C:\\Users\\Dan\\Desktop\\rosu.png")).queue();
         }
     }
 

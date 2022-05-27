@@ -1,18 +1,15 @@
-package drawXML;
+package drawImage;
 
-import org.apache.batik.dom.GenericDOMImplementation;
-import org.apache.batik.svggen.SVGGraphics2D;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-
-import javax.xml.transform.TransformerException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DrawGraph {
+public class DrawGraph extends JPanel {
 
     int xMiddle = 700;
     int yMiddle = 300;
@@ -23,28 +20,20 @@ public class DrawGraph {
     private HashMap<Node, Integer> hashMapX = new HashMap<>();
     private HashMap<Node, Integer> hashMapY = new HashMap<>();
 
-    public DrawGraph(List<Node> nodeList) throws IOException, TransformerException {
+
+    public DrawGraph(List<Node> nodeList) throws IOException {
+
         this.nodeList = nodeList;
+        BufferedImage bi = new BufferedImage(1400, 600, BufferedImage.TYPE_INT_ARGB);
 
-        DOMImplementation domImplementation = GenericDOMImplementation.getDOMImplementation();
+        Graphics2D ig2 = bi.createGraphics();
 
-        String svgNS = "http://www.w3.org/2000/svg";
-        Document document = domImplementation.createDocument(svgNS, "svg", null);
+        this.paintNodes(ig2);
+        this.paintEdges(ig2);
 
-        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+        ImageIO.write(bi, "PNG", new File("C:\\Users\\Dan\\Desktop\\rosu.png"));
 
-        this.paintNodes(svgGenerator);
-        this.paintEdges(svgGenerator);
-
-        boolean useCSS = true;
-
-        OutputStream outputStream = new FileOutputStream("C:\\Users\\andre\\Desktop\\graph.xml");
-        Writer outputStreamWriter = new OutputStreamWriter(outputStream);
-
-        svgGenerator.stream(outputStreamWriter, useCSS);
-        outputStreamWriter.close();
     }
-
 
     public void paintNodes(Graphics2D graphics2D) {
         for (int index = 0; index < this.nodeList.size(); index++) {

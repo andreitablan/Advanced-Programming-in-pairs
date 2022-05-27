@@ -1,4 +1,4 @@
-package drawXML;
+package drawImage;
 
 import java.util.ArrayList;
 import java.util.List;
