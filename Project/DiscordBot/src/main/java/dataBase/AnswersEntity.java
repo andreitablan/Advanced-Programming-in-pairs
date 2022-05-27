@@ -1,5 +1,7 @@
 package dataBase;
 
+import org.dom4j.tree.AbstractEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,7 +12,7 @@ import java.io.Serializable;
         @NamedQuery(name="AnswerEntity.findAll",
                 query = "select e from AnswerEntity e"),
 })*/
-public class AnswersEntity implements Serializable {
+public class AnswersEntity extends AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
