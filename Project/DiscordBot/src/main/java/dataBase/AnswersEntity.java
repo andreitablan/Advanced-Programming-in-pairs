@@ -7,11 +7,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="answers")
-/*
-@NamedQueries({
-        @NamedQuery(name="AnswerEntity.findAll",
-                query = "select e from AnswerEntity e"),
-})*/
 public class AnswersEntity extends AbstractEntity implements Serializable {
 
     @Id
