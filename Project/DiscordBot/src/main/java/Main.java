@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 
 public class Main {
     public static void main(String[] args) throws LoginException, InterruptedException, IOException, FeedException, TransformerException {
-        //AnswersRepository answersRepository = new AnswersRepository();
+        AnswersRepository answersRepository = new AnswersRepository();
         new DiscordBot().run();
     }
 }
