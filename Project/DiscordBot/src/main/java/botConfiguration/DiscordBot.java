@@ -23,53 +23,53 @@ public class DiscordBot extends ListenerAdapter{
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        Message msg = event.getMessage();
-        if (msg.getContentRaw().equals("!ping")) {
+        Message message = event.getMessage();
+        if (message.getContentRaw().equals("!help")) {
             MessageChannel channel = event.getChannel();
-            long time = System.currentTimeMillis();
-            channel.sendMessage("Pong!") /* => RestAction<Message> */
-                    .queue(response /* => Message */ -> {
-                        response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
-                    });
-        } else if (msg.getContentRaw().charAt(0) == '!') {
-            String msgString = msg.getContentRaw().substring(1);
+            String output="You asked for help! \n" +
+                    "You can use the following commands: \n" +
+                    "1. rss:<url> \n"+
+                    "2. !<question>\n" +
+                    "3. dfs: <number of nodes> <starting node> <edges>\n" +
+                    "4. bfs: <number of nodes> <starting node> <edges>\n" +
+                    "5. connected: <number of nodes> <edges>";
+            channel.sendMessage(output).queue();
+        } else if (message.getContentRaw().charAt(0) == '!') {
+            String msgString = message.getContentRaw().substring(1);
             MessageChannel channel = event.getChannel();
             AnswersRepository answersRepository = new AnswersRepository();
-            channel.sendMessage(answersRepository.findByQuestion(msgString))
-                    .queue(response -> response.editMessageFormat(answersRepository.findByQuestion(msgString)));
-        } else if (msg.getContentRaw().substring(0,4).equals("rss:")) {
-            String link = msg.getContentRaw().substring(4);
+            channel.sendMessage(answersRepository.findByQuestion(msgString)).queue();
+        } else if (message.getContentRaw().substring(0,4).equals("rss:")) {
+            String link = message.getContentRaw().substring(4);
             try {
                 RssReader rssReader = new RssReader();
                 String answer = rssReader.readRss(link);
                 MessageChannel channel = event.getChannel();
-                channel.sendMessage(answer).queue(response -> response.editMessageFormat(answer));
+                channel.sendMessage(answer).queue();
             } catch (FeedException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else if (msg.getContentRaw().substring(0,4).equals("dfs:")) {
-            String input = msg.getContentRaw().substring(5);//dfs: 4 2 0-1 0-2 1-2 2-0 2-3
+        } else if (message.getContentRaw().substring(0,4).equals("dfs:")) {
+            String input = message.getContentRaw().substring(5);
             DepthFirstSearch depthFirstSearch=new DepthFirstSearch(input);
             MessageChannel channel = event.getChannel();
-            channel.sendMessage(depthFirstSearch.getNodes())
-                    .queue(response -> response.editMessageFormat(depthFirstSearch.getNodes()));
+            channel.sendMessage(depthFirstSearch.getNodes()).queue();
         }
-        else if (msg.getContentRaw().substring(0,4).equals("bfs:")) {
-            String input = msg.getContentRaw().substring(5);//dfs: 4 2 0-1 0-2 1-2 2-0 2-3
+        else if (message.getContentRaw().substring(0,4).equals("bfs:")) {
+            String input = message.getContentRaw().substring(5);
             BreadthFirstSearch breadthFirstSearch=new BreadthFirstSearch(input);
             MessageChannel channel = event.getChannel();
-            channel.sendMessage(breadthFirstSearch.getNodes())
-                    .queue(response -> response.editMessageFormat(breadthFirstSearch.getNodes()));
+            channel.sendMessage(breadthFirstSearch.getNodes()).queue();
         }
-        else if (msg.getContentRaw().substring(0,10).equals("connected:")) {
-            String input = msg.getContentRaw().substring(11);//dfs: 4 2 0-1 0-2 1-2 2-0 2-3
+        else if (message.getContentRaw().substring(0,10).equals("connected:")) {
+            String input = message.getContentRaw().substring(11);
             ConnectedGraph connectedGraph=new ConnectedGraph();
             MessageChannel channel = event.getChannel();
-            channel.sendMessage(connectedGraph.checkConnected(input))
-                    .queue(response -> response.editMessageFormat(connectedGraph.checkConnected(input)));
+            channel.sendMessage(connectedGraph.checkConnected(input)).queue();
         }
+
     }
 
 
