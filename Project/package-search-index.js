@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"botConfiguration"},{"l":"dataBase"},{"l":"drawImage"},{"l":"exceptions"},{"l":"graphAlgorithms"},{"l":"main"},{"l":"rssReader"},{"l":"timekeeper"}];updateSearchResults();

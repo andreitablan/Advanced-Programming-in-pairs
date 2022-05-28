@@ -1,3 +1,5 @@
+package main;
+
 import botConfiguration.DiscordBot;
 import com.sun.syndication.io.FeedException;
 import dataBase.AnswersRepository;

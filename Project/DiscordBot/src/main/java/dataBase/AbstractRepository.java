@@ -13,6 +13,12 @@ public abstract class AbstractRepository<T extends AbstractEntity, K extends Ser
         manager = managerInstance.getManager();
     }
 
+    /**
+     * Queries the database in order to find an answer to a given question.
+     *
+     * @param question The question sent by the user.
+     * @return The answer for the question.
+     */
     public String findByQuestion(K question) {
         return manager.createQuery("select a from AnswersEntity a where a.question='" + question + "'", AnswersEntity.class).getResultList().get(0).getAnswer();
     }

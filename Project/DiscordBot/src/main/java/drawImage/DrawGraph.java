@@ -12,23 +12,26 @@ import java.util.List;
 
 public class DrawGraph extends JPanel {
 
+    private final HashMap<Node, Integer> hashMapX = new HashMap<>();
+    private final HashMap<Node, Integer> hashMapY = new HashMap<>();
     int xMiddle = 700;
     int yMiddle = 300;
     int math = Math.min(xMiddle, yMiddle);
     int radius = 4 * math / 5;
     int radius1 = Math.abs(math - radius) / 2;
     private List<Node> nodeList = new ArrayList<Node>();
-    private final HashMap<Node, Integer> hashMapX = new HashMap<>();
-    private final HashMap<Node, Integer> hashMapY = new HashMap<>();
 
-
+    /**
+     * Creates a Graphics2D object in order draw the graph.
+     *
+     * @param nodeList The given nodes list.
+     * @throws IOException
+     */
     public DrawGraph(List<Node> nodeList) throws IOException {
 
         this.nodeList = nodeList;
         BufferedImage bufferedImage = new BufferedImage(1400, 600, BufferedImage.TYPE_INT_ARGB);
-
         Graphics2D imageGraphics = bufferedImage.createGraphics();
-
         imageGraphics.setPaint(Color.darkGray);
         imageGraphics.fillRect(0, 0, 1400, 600);
 
@@ -40,6 +43,11 @@ public class DrawGraph extends JPanel {
 
     }
 
+    /**
+     * Paints the nodes of the graph.
+     *
+     * @param graphics2D The Graphics2D object.
+     */
     public void paintNodes(Graphics2D graphics2D) {
         for (int index = 0; index < this.nodeList.size(); index++) {
             double tangent = 2 * Math.PI * index / this.nodeList.size();
@@ -53,14 +61,25 @@ public class DrawGraph extends JPanel {
         }
     }
 
+    /**
+     * Prints the edges of the graph.
+     *
+     * @param graphics2D The Graphics2D object.
+     */
     public void paintEdges(Graphics2D graphics2D) {
         graphics2D.setPaint(Color.yellow);
         graphics2D.setStroke(new BasicStroke(4));
         for (Node node : nodeList) {
-            node.getNeighbours().stream().forEach(neighbour -> graphics2D.drawLine(hashMapX.get(node), hashMapY.get(node), hashMapX.get(neighbour), hashMapY.get(neighbour)));
+            node.getNeighbours().stream().forEach(neighbour -> graphics2D.drawLine(hashMapX.get(node),
+                    hashMapY.get(node), hashMapX.get(neighbour), hashMapY.get(neighbour)));
         }
     }
 
+    /**
+     * Paints the number of the nodes.
+     *
+     * @param graphics2D The Graphics2D object.
+     */
     public void paintNumbers(Graphics2D graphics2D) {
         for (int index = 0; index < this.nodeList.size(); index++) {
             double tangent = 2 * Math.PI * index / this.nodeList.size();
@@ -69,7 +88,8 @@ public class DrawGraph extends JPanel {
 
             graphics2D.setFont(graphics2D.getFont().deriveFont(20f));
             graphics2D.setPaint(Color.blue);
-            graphics2D.drawString(String.valueOf(this.nodeList.get(index).getNumber()), xCoordonate - radius1 + 20, yCoordonate - radius1 + 35);
+            graphics2D.drawString(String.valueOf(this.nodeList.get(index).getNumber()),
+                    xCoordonate - radius1 + 20, yCoordonate - radius1 + 35);
         }
     }
 }

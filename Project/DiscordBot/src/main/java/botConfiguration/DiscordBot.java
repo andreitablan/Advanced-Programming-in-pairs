@@ -31,6 +31,9 @@ public class DiscordBot extends ListenerAdapter {
     private final Thread threadTimerSeconds;
     private final Thread threadTimerMilliseconds;
 
+    /**
+     * Starts two threads for counting the running time.
+     */
     public DiscordBot() {
 
         this.timekeeperSeconds = new TimekeeperSeconds();
@@ -46,6 +49,11 @@ public class DiscordBot extends ListenerAdapter {
 
     }
 
+    /**
+     * Handles the messages from the users, given on the discord server.
+     *
+     * @param event The event that is received when a user sends a message.
+     */
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         Message message = event.getMessage();
@@ -55,7 +63,9 @@ public class DiscordBot extends ListenerAdapter {
                     "You can use the following commands: \n" +
                     "1. rss:<url> \n" +
                     "2. !<question>\n" +
-                    "For this command we have the answer to the following questions: isomorphic, digraph, k-clique, bipartite graph, planar graph, connected graph, connected component, tree, bridge, Eulerian, Hamiltonian.\n" +
+                    "For this command we have the answer to the following questions: isomorphic, digraph, k-clique, " +
+                    "bipartite graph, planar graph, connected graph, connected component, tree, bridge, Eulerian, " +
+                    "Hamiltonian.\n" +
                     "3. dfs: <number of nodes> <starting node> <edges>\n" +
                     "4. bfs: <number of nodes> <starting node> <edges>\n" +
                     "5. connected: <number of nodes> <edges>\n" +
@@ -122,13 +132,17 @@ public class DiscordBot extends ListenerAdapter {
         }
     }
 
+    /**
+     * Connects with the discord server token and runs the bot.
+     *
+     * @throws LoginException
+     * @throws InterruptedException
+     */
     public void run() throws LoginException, InterruptedException {
 
         JDA bot = JDABuilder.createLight("OTc5Mjg4NTI3MTI2NzkwMTU1.Guv5IA.Has0wrUnW60u0UrhiW1je4W9TbMZMZFGw59zBQ",
-                        GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
-                .addEventListeners(new DiscordBot())
-                .setActivity(Activity.playing("Scrie: !help"))
-                .build();
+                GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES).addEventListeners(new DiscordBot())
+                .setActivity(Activity.playing("Scrie: !help")).build();
         bot.awaitReady();
     }
 

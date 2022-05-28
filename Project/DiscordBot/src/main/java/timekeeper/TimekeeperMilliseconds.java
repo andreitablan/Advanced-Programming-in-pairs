@@ -7,6 +7,9 @@ public class TimekeeperMilliseconds implements Runnable, Questionable {
     private Instant start;
     private long timeElapsed;
 
+    /**
+     * Starts the execution of the thread for counting the time.
+     */
     @Override
     public void run() {
         if (Thread.currentThread().isDaemon()) {

@@ -14,6 +14,14 @@ public class RssReader {
     public RssReader() throws IOException, FeedException {
     }
 
+    /**
+     * Reads a rss feed from a given url.
+     *
+     * @param link The given url.
+     * @return Returns the title and the description.
+     * @throws IOException
+     * @throws FeedException
+     */
     public String readRss(String link) throws IOException, FeedException {
         String answer = "";
         URL feedSource = new URL(link);

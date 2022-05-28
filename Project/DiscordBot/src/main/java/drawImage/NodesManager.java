@@ -6,15 +6,19 @@ import java.util.List;
 
 public class NodesManager {
 
-    private int numberOfNodes;
     private final HashMap<String, Integer> nodesMap = new HashMap<>();
     private final List<Node> nodeList = new ArrayList<>();
+    private int numberOfNodes;
 
     public NodesManager() {
     }
 
+    /**
+     * Manages the string input from the user and creates the Node objects.
+     *
+     * @param input The message given by the user.
+     */
     public void manageNodes(String input) {
-        //5 0-1 0-2 1-3 4-4
         String[] splitString = new String[100];
         splitString = input.split(" ");
         numberOfNodes = Integer.parseInt(splitString[0]);
@@ -46,7 +50,6 @@ public class NodesManager {
                 nodeList.add(node);
             }
         }
-
     }
 
     public List<Node> getNodeList() {
