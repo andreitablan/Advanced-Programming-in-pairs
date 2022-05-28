@@ -52,7 +52,7 @@ Functia **!milliseconds** returneaza numarul de milisecunde de cand a fost porni
 
 ## Notiuni folosite pentru implementarea codului
 
-* *Laboratoarele 1 si 2* - Proiectul este construit intr-o maniera OOP. 
+* *Laboratoarele 1 si 2* - Proiectul este construit intr-o maniera **OOP**. 
 * *Laboratorul 3* - Am folosit **generics** pentru construirea clasei abstracte.**AbstractRepository**. Am folosit **Interfaces** pentru implementarea celor doua clase timekeeper.
 * *Laboratorul 4* - Am folosit in diverse clase **Lists**, **HashMaps** si **Streams**.
 * *Laboratorul 5* - Am folosit lucrul cu fisiere in clasa **DrawGraph**, pentru salvearea unui fisier **.png**. 
