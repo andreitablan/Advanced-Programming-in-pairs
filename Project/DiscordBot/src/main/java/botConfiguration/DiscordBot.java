@@ -56,6 +56,7 @@ public class DiscordBot extends ListenerAdapter {
                     "You can use the following commands: \n" +
                     "1. rss:<url> \n" +
                     "2. !<question>\n" +
+                    "For this command we have the answer to the following questions: isomorphic, digraph, k-clique, bipartite graph, planar graph, connected graph, connected component, tree, bridge, Eurelian, Hamiltonian.\n" +
                     "3. dfs: <number of nodes> <starting node> <edges>\n" +
                     "4. bfs: <number of nodes> <starting node> <edges>\n" +
                     "5. connected: <number of nodes> <edges>\n" +
