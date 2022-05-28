@@ -56,7 +56,7 @@ Functia **!milliseconds** returneaza numarul de milisecunde de cand a fost porni
 * *Laboratorul 3* - Am folosit **generics** pentru construirea clasei abstracte.**AbstractRepository**. Am folosit **Interfaces** pentru implementarea celor doua clase timekeeper.
 * *Laboratorul 4* - Am folosit in diverse clase **Lists** si **HashMaps**.
 * *Laboratorul 5* - Am folosit lucrul cu fisiere in clasa **DrawGraph**, pentru salvearea unui fisier **.png**. 
-* *Laboratorul 6* - Am folosit **Java Swing** in clasa **DrawGraph** in vederea desenarii unui graf dat ca input.
+* *Laboratorul 6* - Am folosit **Java Swing** in clasa **DrawGraph** in vederea desenarii unui graf dat ca input. Am folosit **Exceptii** pentru tratarea cazului in case nu exista in baza de date o intrebare data ca input.
 * *Laboratorul 7* - Am implementat doua threaduri **daemon** caren umara in fundal secundele si milisecundele de cand a inceput functionarea botului.
 * *Laboratoarele 8 si 9* - Am stabilit conexiunea cu baza de date printr-un **singleton**, numit **Manager**. Am implementat clase de tipul **Repository**, **Entity**.
 
