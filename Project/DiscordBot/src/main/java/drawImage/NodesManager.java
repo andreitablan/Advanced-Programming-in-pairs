@@ -45,7 +45,6 @@ public class NodesManager {
                 Node node = new Node(nodesMap.get(index));
                 nodeList.add(node);
             }
-
         }
     }
 
