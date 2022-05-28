@@ -39,13 +39,15 @@ public class NodesManager {
                 }
             }
         }
+
         for(int index=0; index<this.numberOfNodes;index++)
         {
-            if(!nodesMap.containsKey(index)){
-                Node node = new Node(nodesMap.get(index));
+            if(!nodesMap.containsKey(Integer.toString(index))){
+                Node node = new Node(index);
                 nodeList.add(node);
             }
         }
+
     }
 
     public List<Node> getNodeList() {
