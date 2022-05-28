@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Node {
     private int number;
-    private List<Node> neighbours=new ArrayList<>();
+    private List<Node> neighbours = new ArrayList<>();
 
     public Node(int number) {
         this.number = number;
     }
 
-    public void addNeighbour(Node node){
+    public void addNeighbour(Node node) {
         neighbours.add(node);
     }
 

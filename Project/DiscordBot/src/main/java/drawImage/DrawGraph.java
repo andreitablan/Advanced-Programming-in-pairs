@@ -4,7 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,8 @@ public class DrawGraph extends JPanel {
     int radius = 4 * math / 5;
     int radius1 = Math.abs(math - radius) / 2;
     private List<Node> nodeList = new ArrayList<Node>();
-    private HashMap<Node, Integer> hashMapX = new HashMap<>();
-    private HashMap<Node, Integer> hashMapY = new HashMap<>();
+    private final HashMap<Node, Integer> hashMapX = new HashMap<>();
+    private final HashMap<Node, Integer> hashMapY = new HashMap<>();
 
 
     public DrawGraph(List<Node> nodeList) throws IOException {
@@ -29,7 +30,7 @@ public class DrawGraph extends JPanel {
         Graphics2D imageGraphics = bufferedImage.createGraphics();
 
         imageGraphics.setPaint(Color.darkGray);
-        imageGraphics.fillRect(0,0,1400,600);
+        imageGraphics.fillRect(0, 0, 1400, 600);
 
         this.paintNodes(imageGraphics);
         this.paintEdges(imageGraphics);

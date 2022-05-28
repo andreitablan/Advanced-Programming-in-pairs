@@ -7,8 +7,8 @@ import java.util.List;
 public class NodesManager {
 
     private int numberOfNodes;
-    private HashMap<String, Integer> nodesMap = new HashMap<>();
-    private List<Node> nodeList = new ArrayList<>();
+    private final HashMap<String, Integer> nodesMap = new HashMap<>();
+    private final List<Node> nodeList = new ArrayList<>();
 
     public NodesManager() {
     }
@@ -40,9 +40,8 @@ public class NodesManager {
             }
         }
 
-        for(int index=0; index<this.numberOfNodes;index++)
-        {
-            if(!nodesMap.containsKey(Integer.toString(index))){
+        for (int index = 0; index < this.numberOfNodes; index++) {
+            if (!nodesMap.containsKey(Integer.toString(index))) {
                 Node node = new Node(index);
                 nodeList.add(node);
             }

@@ -5,9 +5,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Manager {
-    private EntityManagerFactory factory;
-    private EntityManager manager;
     private static Manager managerInstance = null;
+    private final EntityManagerFactory factory;
+    private final EntityManager manager;
 
     private Manager() {
         this.factory = Persistence.createEntityManagerFactory("DiscordBotDatabase");

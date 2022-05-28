@@ -6,16 +6,16 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="answers")
+@Table(name = "answers")
 public class AnswersEntity extends AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
-    @Column(name="question")
+    @Column(name = "question")
     private String question;
-    @Column(name="answer")
+    @Column(name = "answer")
     private String answer;
 
     public AnswersEntity() {
@@ -52,10 +52,6 @@ public class AnswersEntity extends AbstractEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "AnswersEntity{" +
-                "id=" + id +
-                ", question='" + question + '\'' +
-                ", answer='" + answer + '\'' +
-                '}';
+        return "AnswersEntity{" + "id=" + id + ", question='" + question + '\'' + ", answer='" + answer + '\'' + '}';
     }
 }
