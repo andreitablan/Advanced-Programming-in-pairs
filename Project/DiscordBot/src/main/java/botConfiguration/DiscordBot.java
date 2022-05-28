@@ -122,7 +122,7 @@ public class DiscordBot extends ListenerAdapter {
             channel.sendFile(new File("C:\\Users\\andre\\Desktop\\graph.png")).queue();
         }
     }
-    
+
     public void run() throws LoginException, InterruptedException {
 
         JDA bot = JDABuilder.createLight("OTc5Mjg4NTI3MTI2NzkwMTU1.Guv5IA.Has0wrUnW60u0UrhiW1je4W9TbMZMZFGw59zBQ",
