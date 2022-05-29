@@ -1,11 +1,16 @@
 package main;
 
+import handlers.ClassHandler;
+import handlers.DirectoryHandler;
+import handlers.TestHandler;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 
 public class Main {
-        public static void main (String args[]) throws MalformedURLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        public static void main (String args[]) throws MalformedURLException, ClassNotFoundException,
+                InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
             ClassHandler classHandler = new ClassHandler();
             classHandler.run();
 

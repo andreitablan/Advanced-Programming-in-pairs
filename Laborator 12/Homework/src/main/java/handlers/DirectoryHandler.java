@@ -1,4 +1,4 @@
-package main;
+package handlers;
 
 import com.beust.ah.A;
 import com.google.common.io.Files;
@@ -27,6 +27,17 @@ public class DirectoryHandler {
         this.packageCounter = 0;
     }
 
+    /**
+     * Loads a directory given as input and parses it recursively for every .class file.
+     *
+     * @param directory The directory given as input.
+     * @throws MalformedURLException
+     * @throws ClassNotFoundException
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public void loadClass(File directory) throws MalformedURLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         this.packageCounter++;
         this.directory = directory;
@@ -62,6 +73,15 @@ public class DirectoryHandler {
         }
     }
 
+    /**
+     * Generates information about a .class file, in javap style.
+     *
+     * @param aClass A Class object representing the class from the .class file.
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public void generateInformation(Class aClass) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Field[] fields = aClass.getDeclaredFields();
         for (Field field : fields) {
@@ -83,6 +103,17 @@ public class DirectoryHandler {
         }
     }
 
+    /**
+     * Invokes the method given as parameter.
+     *
+     * @param aClass     A Class object representing the class from the .class file.
+     * @param method     The method to be invoked.
+     * @param parameters The parameters of the given method.
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     private void invokeMethod(Class aClass, Method method, Class[] parameters) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
 
         Random random = new Random();
@@ -99,9 +130,14 @@ public class DirectoryHandler {
         method.invoke(aClass.getConstructor().newInstance(), values.toArray());
     }
 
+    /**
+     * Generates a random String.
+     *
+     * @return The random generated String.
+     */
     public String generateString() {
         Random random1 = new Random();
-        int length = random1.nextInt(1,10);
+        int length = random1.nextInt(1, 10);
         int leftLimit = 97;
         int rightLimit = 122;
         String randomString = random1.ints(leftLimit, rightLimit + 1)

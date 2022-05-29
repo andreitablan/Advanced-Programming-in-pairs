@@ -1,4 +1,4 @@
-package main;
+package handlers;
 
 import com.google.common.io.Files;
 import org.testng.annotations.Test;
@@ -14,27 +14,38 @@ public class TestHandler {
 
     private File directory;
 
-    public TestHandler(File directory){
-        this.directory=directory;
+    public TestHandler(File directory) {
+        this.directory = directory;
     }
 
+    /**
+     * Loads a directory with the .class files of the test, generates information about the tests.
+     *
+     * @param directory The directory given an input
+     * @throws MalformedURLException
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public void loadTest(File directory) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        File[] files=directory.listFiles();
+        File[] files = directory.listFiles();
 
         System.out.println("\n" + "Tests");
-        for(File file1 : files){
-            if(file1.isFile()) {
+        for (File file1 : files) {
+            if (file1.isFile()) {
                 if (Files.getFileExtension(file1.getName()).equals("class")) {
                     String pathname = file1.getParent();
-                    pathname=pathname+"\\..\\";
+                    pathname = pathname + "\\..\\";
                     File file = new File(pathname);
                     URL url = file.toURI().toURL();
                     URL[] urls = new URL[]{url};
                     ClassLoader classLoader = new URLClassLoader(urls);
 
                     Class aTestClass = classLoader.loadClass("compulsory." + file1.getName().substring(0, file1.getName().indexOf(".")));
-                    Method[] methods=aTestClass.getDeclaredMethods();
-                    for(Method method:methods){
+                    Method[] methods = aTestClass.getDeclaredMethods();
+                    for (Method method : methods) {
                         System.out.println("\nName: " + method.getName());
                         System.out.println("Declaring Class: " + method.getDeclaringClass());
                         System.out.println("Return Type: " + method.getAnnotatedReturnType());

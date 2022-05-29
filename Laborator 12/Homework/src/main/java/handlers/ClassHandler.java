@@ -1,4 +1,4 @@
-package main;
+package handlers;
 
 
 import org.testng.annotations.Test;
@@ -15,6 +15,9 @@ import java.net.URLClassLoader;
 
 public class ClassHandler {
 
+    /**
+     * Sets the path to a .class file, prints the package, the name of its methods and invokes the methods.
+     */
     public void run() {
         try {
             File file = new File("D:\\git\\FII_PA_LeaganDan_TablanAndrei\\Laborator 12\\TestedClasses\\Compulsory\\target\\classes");
