@@ -1,9 +1,9 @@
-package lab11.compulsory.person;
+package lab11.compulsory.friendship;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="friendship1")
+@Table(name = "friendship1")
 public class Friendship1 {
     @Id
     private Long id;

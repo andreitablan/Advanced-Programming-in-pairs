@@ -1,5 +1,7 @@
 package lab11.compulsory.person;
 
+import lab11.compulsory.friendship.Friendship1;
+import lab11.compulsory.friendship.FriendshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,11 @@ public class PersonService {
         this.friendshipRepository = friendshipRepository;
     }
 
+    /**
+     * Finds the most k popular persons from the database.
+     * @param popularPeople The number of people that are searched.
+     * @return A list with the found people.
+     */
     public List<Optional<Person>> findMostPopular(int popularPeople) {
         List<Friendship1> friendshipList = friendshipRepository.findAll();
         for (Friendship1 friendship1 : friendshipList) {

@@ -1,5 +1,6 @@
 package lab11.compulsory.person;
 
+import lab11.compulsory.friendship.Friendship1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,12 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
+
+    @GetMapping("/get/hello")
+    public String gethello() {
+        return "Hello";
+    }
+
 
     @GetMapping("/get/person")
     public List<Person> getPersons() {
