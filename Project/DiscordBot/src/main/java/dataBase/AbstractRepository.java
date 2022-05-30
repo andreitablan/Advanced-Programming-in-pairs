@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public abstract class AbstractRepository<T extends AbstractEntity, K extends Serializable> {
     protected EntityManager manager;
+    private Class<T> type;
 
     public AbstractRepository() {
         Manager managerInstance = Manager.getInstance();
@@ -20,7 +21,8 @@ public abstract class AbstractRepository<T extends AbstractEntity, K extends Ser
      * @return The answer for the question.
      */
     public String findByQuestion(K question) {
-        return manager.createQuery("select a from AnswersEntity a where a.question='" + question + "'", AnswersEntity.class).getResultList().get(0).getAnswer();
+        String answer = manager.createQuery("select a from AnswersEntity a where a.question='" + question + "'", AnswersEntity.class).getResultList().get(0).getAnswer();
+        return answer;
     }
 
 }
