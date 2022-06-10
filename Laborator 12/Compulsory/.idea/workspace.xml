@@ -5,19 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bbe4ca3-c05f-4e7d-8862-b41403a460dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Lab11/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/main/java/lab11/compulsory/Lab11Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/main/java/lab11/compulsory/person/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/main/java/lab11/compulsory/person/PersonController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/main/java/lab11/compulsory/person/PersonRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/main/java/lab11/compulsory/person/PersonService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab11/src/test/java/lab11/compulsory/Lab11ApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Project/DiscordBot/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Project/DiscordBot/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
